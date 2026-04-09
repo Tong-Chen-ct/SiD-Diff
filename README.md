@@ -4,8 +4,10 @@
 SiD-Diff is a deep learning framework designed to identify and interpret structural differences in 3D genome organization from Hi-C data. It addresses the lack of systematic characterization of differential chromatin interaction patterns and provides biologically meaningful insights into genome reorganization.
 
 ## Key Features
-- **Data processing**：Construct paired samples from the datasets, using the K562-GM12878 pair as the training set. Segment the Hi-C contact maps along the diagonal using a sliding window approach with overlap compensation to ensure comprehensive coverage.Compute the differences between paired samples by integrating structural similarity and difference matrices. Samples with larger discrepancies are labeled as 1, while those with smaller discrepancies are labeled as 0. 
+- **Data processing**：Construct paired samples from the datasets, using the K562-GM12878 pair as the training set. Segment the Hi-C contact maps along the diagonal using a sliding window approach with overlap compensation to ensure comprehensive coverage.Compute the differences between paired samples by integrating structural similarity and difference matrices. Samples with larger discrepancies are labeled as 1, while those with smaller discrepancies are labeled as 0.
+ ![Example of TAD prediction](https://raw.githubusercontent.com/Tong-Chen-ct/SiD-Diff/main/Figure1.png)
 - **Manually selected data**：As illustrated, all segmented sample pairs are visualized for quality control. For samples labeled as 0, pairs that exhibit relatively larger differences are filtered out; similarly, for samples labeled as 1, pairs with relatively smaller differences are removed to improve label consistency and overall data quality.
+ ![Example of TAD prediction](https://raw.githubusercontent.com/Tong-Chen-ct/SiD-Diff/main/Figure2.png)
 - **Model architecture**：we developed SiD-Diff, which integrates convolutional neural networks (CNNs) and Transformers to model structural differences between paired Hi-C matrices, and incorporates biologically informed region encoding and cross-attention to enhance feature representation, together with knowledge distillation to improve model stability and generalization.
 - **Interpretable Differential Patterns in 3D Genome Organization**: SiD-Diff identifies four key differential morphological patterns—boundary, stripe, asymmetric, and interior variations—through interpretability analysis. These patterns are strongly associated with dynamic changes in chromatin structural proteins such as CTCF and RAD21, highlighting the model’s ability to capture biologically meaningful features underlying 3D genome reorganization.
 - **Cross-cell-line and cross-resolution universality**: SiD-Diff model demonstrates superior performance compared to Twins across both cross-cell-line and cross-resolution experiments.
@@ -56,3 +58,15 @@ python SiD-Diff.py
 - Two-Stage Training with Distillation: Stage 1 uses BCE loss for pretraining; Stage 2 applies knowledge distillation with adaptive weighting to improve performance.
 
 ## File Structure
+```
+SiD-Diff/
+├── README.md
+├── SiD-Diff_model.py
+├── strategies_6.py
+├── Figure1.png
+├── Figure2.png
+├── weight
+    ├── student_stage1_best.ckpt.index
+    ├── teacher_best.ckpt.index
+    └── student_stage2_best.ckpt.index
+```
